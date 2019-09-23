@@ -1,0 +1,59 @@
+<!--
+ * @Autor: ErioY
+ * @Date: 2019-09-22 16:12:35
+ * @Email: 1973545559@qq.com
+ * @Github: https://github.com/ErioY
+ * @LastEditors: ErioY
+ * @LastEditTime: 2019-09-22 16:36:25
+ -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>组合继承实例</title>
+</head>
+<body>
+    <script>
+    // 创建一个animal父类(共有属性color、sex)，
+    // 一个dog子类(共有属性name和wang())和一个cat子类(共有属性name和miao())，
+    // 分别用两个子类创建一个实例，
+    // 要求该实例可以通过继承为其设置color和sex，并用子类的共有属性设置对应属性和方法
+    function Animal(color,sex) {
+        this.color = color;
+        this.sex = sex;
+    }
+    Animal.prototype.eat = function() {
+        console.log("开心的吃");
+    }
+    function Dog(name,color,sex) {
+        Animal.call(this,color,sex);
+        this.name = name;
+    }
+    Dog.prototype = new Animal();
+    Dog.prototype.wang = function () {
+        console.log("wang");
+    }
+    function Cat(name,color,sex) {
+        Animal.call(this,color,sex);
+        this.name = name;
+    }
+    Cat.prototype = new Animal();
+    Cat.prototype.miao = function () {
+        console.log("miao");
+    }
+    
+    // 实例化
+    var cat = new Cat("加菲猫","yellow","公");
+    console.log(cat);
+    cat.miao();
+    cat.eat();
+
+    var dog = new Dog("哈士奇","black","母");
+    console.log(dog);
+    dog.wang();
+    dog.eat();
+    </script>
+</body>
+</html>
